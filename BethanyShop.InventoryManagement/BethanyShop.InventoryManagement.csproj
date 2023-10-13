@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Domain\" />
+    <None Remove="Domain\ProductManagement\" />
+    <None Remove="Domain\General\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\" />
+    <Folder Include="Domain\ProductManagement\" />
+    <Folder Include="Domain\General\" />
+  </ItemGroup>
 </Project>

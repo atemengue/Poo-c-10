@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Text;
+using BethanyShop.InventoryManagement.Domain.General;
 
-namespace BethanyShop.InventoryManagement
+namespace BethanyShop.InventoryManagement.Domain.ProductManagement
 {
     public class Product
     {
@@ -67,6 +68,8 @@ namespace BethanyShop.InventoryManagement
         public UnitType UnitType { get; set; }
         public int AmoutInStock { get; private set; }
         public bool IsBelowStockThreshold { get; private set; }
+
+        public Price Price { get; set; }
 
         public void UseProduct(int items)
         {
@@ -148,7 +151,7 @@ namespace BethanyShop.InventoryManagement
         {
             StringBuilder sb = new();
             //ToDo: add price here too
-            sb.Append($"{Id} {Name} \n{Description}\n{AmoutInStock} item(s) in stock");
+            sb.Append($"{Id} {Name} \n{Description}\n{Price}\n{AmoutInStock} item(s) in stock");
 
             if (IsBelowStockThreshold)
             {
@@ -163,7 +166,7 @@ namespace BethanyShop.InventoryManagement
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"{Id} {Name} \n{Description}\n{AmoutInStock} item(s) in stock");
+            sb.Append($"{Id} {Name} \n{Description}\n{Price}\n{AmoutInStock} item(s) in stock");
 
             sb.Append(extraDetails);
 
