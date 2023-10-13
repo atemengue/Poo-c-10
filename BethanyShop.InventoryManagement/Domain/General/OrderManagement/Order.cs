@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+
 namespace BethanyShop.InventoryManagement.Domain.General.OrderManagement
 {
 	public class Order
@@ -16,6 +18,24 @@ namespace BethanyShop.InventoryManagement.Domain.General.OrderManagement
             OrderFulfilmentDate = DateTime.Now.AddSeconds(numberofSeconds);
 
             OrderItems = new List<OrderItem>();
+        }
+
+        public string ShowOrderDetails()
+        {
+            StringBuilder orderDetails = new StringBuilder();
+
+            orderDetails.AppendLine($"Order ID: {Id}");
+            orderDetails.AppendLine($"Order fulfilment date: {OrderFulfilmentDate.ToShortTimeString()}");
+
+            if (OrderItems != null)
+            {
+                foreach (OrderItem item in OrderItems)
+                {
+                    orderDetails.AppendLine();
+                }
+            }
+
+            return orderDetails.ToString();
         }
 
     }

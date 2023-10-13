@@ -48,5 +48,14 @@ static void PrintWelcome()
     Console.ReadLine();
 
     Console.Clear();
+
+    Utilities.InitializeStock();
+
+    Utilities.ShowMainMenu();
+
+    Console.WriteLine("Application shutting down...");
+
+    Console.ReadLine();
+
 }
 #endregion

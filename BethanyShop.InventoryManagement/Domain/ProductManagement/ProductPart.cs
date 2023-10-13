@@ -16,7 +16,7 @@ namespace BethanyShop.InventoryManagement.Domain.ProductManagement
                 StockThresold = newStockThreshold;
             }
         }
-        private void UpdateLowStock()
+        public void UpdateLowStock()
         {
             if (AmoutInStock < StockThresold)//for now a fixed value
             {
@@ -35,20 +35,6 @@ namespace BethanyShop.InventoryManagement.Domain.ProductManagement
             return $"Product {id} ({name})";
         }
 
-        public string DisplayDetailsFull()
-        {
-            StringBuilder sb = new();
-            //ToDo: add price here too
-            sb.Append($"{Id} {Name} \n{Description}\n{Price}\n{AmoutInStock} item(s) in stock");
-
-            if (IsBelowStockThreshold)
-            {
-                sb.Append("\n!!STOCK LOW!!");
-            }
-
-            return sb.ToString();
-
-        }
 
         public string DisplayDetailsFull(string extraDetails)
         {

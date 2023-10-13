@@ -129,6 +129,23 @@ namespace BethanyShop.InventoryManagement.Domain.ProductManagement
             Log(reason);
         }
 
+        public string DisplayDetailsShort()
+        {
+            return $"{Id}. {Name} \n{AmoutInStock} items in stock";
+        }
 
+        public string DisplayDetailsFull()
+        {
+            StringBuilder sb = new();
+            sb.Append($"{Id} {Name} \n{Description}\n{AmoutInStock} item(s) in stock");
+
+            if (IsBelowStockThreshold)
+            {
+                sb.Append("\n!!STOCK LOW!!");
+            }
+
+            return sb.ToString();
+
+        }
     }
 }
