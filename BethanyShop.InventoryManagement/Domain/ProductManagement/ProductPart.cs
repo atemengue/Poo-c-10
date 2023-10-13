@@ -4,11 +4,21 @@ using BethanyShop.InventoryManagement.Domain.General;
 
 namespace BethanyShop.InventoryManagement.Domain.ProductManagement
 {
+
 	public partial class Product
 	{
+        public static int StockThresold = 5;
+
+        public static void ChangeStockThreshold(int newStockThreshold)
+        {
+            if (newStockThreshold > 0)
+            {
+                StockThresold = newStockThreshold;
+            }
+        }
         private void UpdateLowStock()
         {
-            if (AmoutInStock < 10)//for now a fixed value
+            if (AmoutInStock < StockThresold)//for now a fixed value
             {
                 IsBelowStockThreshold = true;
             }

@@ -24,12 +24,13 @@ namespace BethanyShop.InventoryManagement.Domain.ProductManagement
             Name = name;
         }
 
-        public Product(int id, string name, string? Description, UnitType unitType, int maxAmountInStock)
+        public Product(int id, string name, string? Description, Price price, UnitType unitType, int maxAmountInStock)
         {
             Id = id;
             Name = name;
             Description = description;
             UnitType = unitType;
+            Price = price;
 
             maxItemsInStock = maxAmountInStock;
 
@@ -106,7 +107,7 @@ namespace BethanyShop.InventoryManagement.Domain.ProductManagement
                 Log($"{CreateSimpleProductRepresentation} stock overflow. {newStock - AmoutInStock} item(s) ordered that couldn't be stored");
             }
 
-            if (AmoutInStock > 10)
+            if (AmoutInStock > StockThresold)
             {
                 IsBelowStockThreshold = false;
             }

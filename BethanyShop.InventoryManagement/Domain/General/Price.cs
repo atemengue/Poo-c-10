@@ -4,7 +4,13 @@ namespace BethanyShop.InventoryManagement.Domain.General
 {
 	public class Price
 	{
-		public double ItemPrice { get; set; }
+        //public Price(int v, Currency euro)
+        //{
+        //    ItemPrice = v;
+        //    Currency = euro;
+        //}
+
+        public double ItemPrice { get; set; }
 
 		public Currency Currency { get; set; }
 
