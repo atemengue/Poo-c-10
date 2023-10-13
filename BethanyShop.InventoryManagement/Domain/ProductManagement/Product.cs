@@ -67,61 +67,61 @@ namespace BethanyShop.InventoryManagement.Domain.ProductManagement
         }
 
         public UnitType UnitType { get; set; }
-        public int AmoutInStock { get; private set; }
+        public int AmountInStock { get; private set; }
         public bool IsBelowStockThreshold { get; private set; }
 
         public Price Price { get; set; }
 
         public void UseProduct(int items)
         {
-            if (items <= AmoutInStock)
+            if (items <= AmountInStock)
             {
                 //use the items
-                AmoutInStock -= items;
+                AmountInStock -= items;
 
                 UpdateLowStock();
 
-                Log($"Amount in stock updated. Now {AmoutInStock} items in stock.");
+                Log($"Amount in stock updated. Now {AmountInStock} items in stock.");
             }
             else
             {
-                Log($"Not enough items on stock for {CreateSimpleProductRepresentation()}. {AmoutInStock} available but {items} requested.");
+                Log($"Not enough items on stock for {CreateSimpleProductRepresentation()}. {AmountInStock} available but {items} requested.");
             }
         }
 
         public void IncreaseStock()
         {
-            AmoutInStock++;
+            AmountInStock++;
         }
 
         public void IncreaseStock(int amount)
         {
-            int newStock = AmoutInStock + amount;
+            int newStock = AmountInStock + amount;
 
             if (newStock <= maxItemsInStock)
             {
-                AmoutInStock += amount;
+                AmountInStock += amount;
             } else
             {
-                AmoutInStock = maxItemsInStock;
-                Log($"{CreateSimpleProductRepresentation} stock overflow. {newStock - AmoutInStock} item(s) ordered that couldn't be stored");
+                AmountInStock = maxItemsInStock;
+                Log($"{CreateSimpleProductRepresentation} stock overflow. {newStock - AmountInStock} item(s) ordered that couldn't be stored");
             }
 
-            if (AmoutInStock > StockThresold)
+            if (AmountInStock > StockThresold)
             {
                 IsBelowStockThreshold = false;
             }
         }
         private void DecreaseStock(int items, string reason)
         {
-            if (items <= AmoutInStock)
+            if (items <= AmountInStock)
             {
                 //decrease the stock with the specified number items
-                AmoutInStock -= items;
+                AmountInStock -= items;
             }
             else
             {
-                AmoutInStock = 0;
+                AmountInStock = 0;
             }
 
             UpdateLowStock();
@@ -131,13 +131,13 @@ namespace BethanyShop.InventoryManagement.Domain.ProductManagement
 
         public string DisplayDetailsShort()
         {
-            return $"{Id}. {Name} \n{AmoutInStock} items in stock";
+            return $"{Id}. {Name} \n{AmountInStock} items in stock";
         }
 
         public string DisplayDetailsFull()
         {
             StringBuilder sb = new();
-            sb.Append($"{Id} {Name} \n{Description}\n{AmoutInStock} item(s) in stock");
+            sb.Append($"{Id} {Name} \n{Description}\n{AmountInStock} item(s) in stock");
 
             if (IsBelowStockThreshold)
             {

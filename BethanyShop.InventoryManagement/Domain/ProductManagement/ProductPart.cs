@@ -18,7 +18,7 @@ namespace BethanyShop.InventoryManagement.Domain.ProductManagement
         }
         public void UpdateLowStock()
         {
-            if (AmoutInStock < StockThresold)//for now a fixed value
+            if (AmountInStock < StockThresold)//for now a fixed value
             {
                 IsBelowStockThreshold = true;
             }
@@ -40,7 +40,7 @@ namespace BethanyShop.InventoryManagement.Domain.ProductManagement
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"{Id} {Name} \n{Description}\n{Price}\n{AmoutInStock} item(s) in stock");
+            sb.Append($"{Id} {Name} \n{Description}\n{Price}\n{AmountInStock} item(s) in stock");
 
             sb.Append(extraDetails);
 
