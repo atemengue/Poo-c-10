@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace BethanyShop.InventoryManagement
 {
@@ -13,6 +14,26 @@ namespace BethanyShop.InventoryManagement
         //private UnitType unitType;
         //private int amountInStock = 0;
         //private bool isBelowStockThreshold = false;
+
+        public Product(int id): this(id, string.Empty) {}
+
+        public Product(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+        public Product(int id, string name, string? Description, UnitType unitType, int maxAmountInStock)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            UnitType = unitType;
+
+            maxItemsInStock = maxAmountInStock;
+
+            UpdateLowStock();
+        }
 
         public int Id
         {
@@ -69,6 +90,24 @@ namespace BethanyShop.InventoryManagement
             AmoutInStock++;
         }
 
+        public void IncreaseStock(int amount)
+        {
+            int newStock = AmoutInStock + amount;
+
+            if (newStock <= maxItemsInStock)
+            {
+                AmoutInStock += amount;
+            } else
+            {
+                AmoutInStock = maxItemsInStock;
+                Log($"{CreateSimpleProductRepresentation} stock overflow. {newStock - AmoutInStock} item(s) ordered that couldn't be stored");
+            }
+
+            if (AmoutInStock > 10)
+            {
+                IsBelowStockThreshold = false;
+            }
+        }
         private void DecreaseStock(int items, string reason)
         {
             if (items <= AmoutInStock)
@@ -103,6 +142,37 @@ namespace BethanyShop.InventoryManagement
         private string CreateSimpleProductRepresentation()
         {
             return $"Product {id} ({name})";
+        }
+
+        public string DisplayDetailsFull()
+        {
+            StringBuilder sb = new();
+            //ToDo: add price here too
+            sb.Append($"{Id} {Name} \n{Description}\n{AmoutInStock} item(s) in stock");
+
+            if (IsBelowStockThreshold)
+            {
+                sb.Append("\n!!STOCK LOW!!");
+            }
+
+            return sb.ToString();
+
+        }
+
+        public string DisplayDetailsFull(string extraDetails)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append($"{Id} {Name} \n{Description}\n{AmoutInStock} item(s) in stock");
+
+            sb.Append(extraDetails);
+
+            if (IsBelowStockThreshold)
+            {
+                sb.Append("\n!!STOCK LOW!!");
+            }
+
+            return sb.ToString();
         }
 
     }
