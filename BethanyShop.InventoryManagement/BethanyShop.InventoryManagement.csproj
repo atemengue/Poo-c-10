@@ -11,10 +11,12 @@
     <None Remove="Domain\" />
     <None Remove="Domain\ProductManagement\" />
     <None Remove="Domain\General\" />
+    <None Remove="Domain\General\OrderManagement\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\" />
     <Folder Include="Domain\ProductManagement\" />
     <Folder Include="Domain\General\" />
+    <Folder Include="Domain\General\OrderManagement\" />
   </ItemGroup>
 </Project>
